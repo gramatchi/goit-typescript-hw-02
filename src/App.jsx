@@ -6,17 +6,30 @@ import ImageModal from "./components/ImageModal/ImageModal";
 import Loader from "./components/Loader/Loader";
 import LoadMoreBtn from "./components/LoadMoreBtn/LoadMoreBtn";
 import SearchBar from "./components/SearchBar/SearchBar";
-import axios from "axios";
+import { fetchPhoto } from "./services/api";
 
 function App() {
   const [photos, setPhotos] = useState([]);
+  const [isLoading, setIsLoading] = useState(false)
+  const [isError, setIsError] = useState(false)
 
   useEffect(() => {
-    axios
-      .get(
-        "https://api.unsplash.com/photos/?client_id=oVlIOsaX75GGNo4uFhQZvWzCTPnyPqNUnzW0wEoqoF4&query=office"
-      )
-      .then((res) => setPhotos(res.data));
+    const fetchData = async () => {
+      try{
+        setIsLoading(true)
+        setIsError(false)
+        const data = await fetchPhoto('office')
+        setPhotos(data)
+      }
+      catch(error){
+        console.log(error);
+        setIsError(true)
+      }
+      finally{
+        setIsLoading(false)
+      }
+    }
+    fetchData()
   }, []);
 
   // https://api.unsplash.com/photos/?client_id=oVlIOsaX75GGNo4uFhQZvWzCTPnyPqNUnzW0wEoqoF4&query=${query}
@@ -25,9 +38,9 @@ function App() {
     <>
       <LoadMoreBtn />
       <SearchBar />
+      {isLoading && <Loader />}
       <ImageGallery photos={photos}/>
-      <Loader />
-      <ErrorMessage />
+      {isError && <ErrorMessage />}
       <ImageModal />
     </>
   );

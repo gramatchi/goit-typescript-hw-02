@@ -1,9 +1,11 @@
-const ImageCard = ({photo}) => {
+const ImageCard = ({ photo }) => {
   return (
     <li>
-      <img src={photo.urls.regular} alt="" />
+      <div>
+        <img src={photo.urls.regular} alt="" />
+      </div>
     </li>
-  )
-}
+  );
+};
 
-export default ImageCard
+export default ImageCard;
