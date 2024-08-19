@@ -3,12 +3,16 @@ import toast, { Toaster } from "react-hot-toast";
 
 const notify = (value) => {if(value === "") toast("Fill the field");}
 
-const SearchBar = () => {
+const SearchBar = ({fetchPhotos}) => {
   const [searchValue, setSearchValue] = useState("");
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    notify(searchValue);
+    if (searchValue.trim() === "") {
+      notify(searchValue);
+      return;
+    }
+    fetchPhotos(searchValue)
     setSearchValue("");
   }
 
