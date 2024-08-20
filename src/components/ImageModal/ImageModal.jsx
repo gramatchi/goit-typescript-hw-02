@@ -10,6 +10,12 @@ const customStyles = {
     marginRight: "-50%",
     transform: "translate(-50%, -50%)",
     backgroundColor: "#333",
+    border: "none",
+    borderRadius: "8px",
+    padding: "20px",
+    maxWidth: "90%",
+    maxHeight: "90%",
+    overflow: "auto",
   },
 };
 
