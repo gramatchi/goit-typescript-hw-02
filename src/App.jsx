@@ -62,14 +62,12 @@ function App() {
       <ImageGallery photos={photos} handleOpenModal={handleOpenModal} />
       {isError && <ErrorMessage />}
       <LoadMoreBtn onChangePage={onChangePage} />
-      {openModal && (
-        <ImageModal
-          modalIsOpen={openModal}
-          closeModal={handleCloseModal}
-          url={modalPhoto.url}
-          alt={modalPhoto.alt}
-        />
-      )}
+      <ImageModal
+        modalIsOpen={openModal}
+        closeModal={handleCloseModal}
+        url={modalPhoto.url}
+        alt={modalPhoto.alt}
+      />
     </>
   );
 }
