@@ -3,7 +3,7 @@ import toast, { Toaster } from "react-hot-toast";
 
 const notify = (value) => {if(value === "") toast("Fill the field");}
 
-const SearchBar = ({fetchPhotos}) => {
+const SearchBar = ({handleChangeQuery}) => {
   const [searchValue, setSearchValue] = useState("");
 
   const handleSubmit = (e) => {
@@ -12,7 +12,7 @@ const SearchBar = ({fetchPhotos}) => {
       notify(searchValue);
       return;
     }
-    fetchPhotos(searchValue)
+    handleChangeQuery(searchValue)
     setSearchValue("");
   }
 

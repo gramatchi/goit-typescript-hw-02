@@ -10,37 +10,46 @@ import { fetchPhoto } from "./services/api";
 
 function App() {
   const [photos, setPhotos] = useState([]);
-  const [isLoading, setIsLoading] = useState(false)
-  const [isError, setIsError] = useState(false)
+  const [isLoading, setIsLoading] = useState(false);
+  const [isError, setIsError] = useState(false);
+  const [page, setPage] = useState(0);
+  const [query, setQuery] = useState(""); // Инициализация как строка
+
+  const handleChangeQuery = (newQuery) => {
+    setQuery(newQuery);
+    setPage(1); // Сброс страницы на 1 при новом поисковом запросе
+    setPhotos([]); // Очищаем предыдущие результаты поиска
+  };
 
   useEffect(() => {
+    if (query === "") return; // Не делаем запрос, если query пустой
     const fetchData = async () => {
-      try{
-        setIsLoading(true)
-        setIsError(false)
-        const data = await fetchPhoto('office')
-        setPhotos(data)
-      }
-      catch(error){
+      try {
+        setIsLoading(true);
+        setIsError(false);
+        const data = await fetchPhoto(query, page);
+        setPhotos((prev) => [...prev, ...data]);
+      } catch (error) {
         console.log(error);
-        setIsError(true)
+        setIsError(true);
+      } finally {
+        setIsLoading(false);
       }
-      finally{
-        setIsLoading(false)
-      }
-    }
-    fetchData()
-  }, []);
+    };
+    fetchData();
+  }, [query, page]); // Добавлено отслеживание query
 
-  // https://api.unsplash.com/photos/?client_id=oVlIOsaX75GGNo4uFhQZvWzCTPnyPqNUnzW0wEoqoF4&query=${query}
+  const onChangePage = () => {
+    setPage((prev) => prev + 1);
+  };
 
   return (
     <>
-      <LoadMoreBtn />
-      <SearchBar />
+      <SearchBar handleChangeQuery={handleChangeQuery} />
       {isLoading && <Loader />}
-      <ImageGallery photos={photos}/>
+      <ImageGallery photos={photos} />
       {isError && <ErrorMessage />}
+      <LoadMoreBtn onChangePage={onChangePage} />
       <ImageModal />
     </>
   );

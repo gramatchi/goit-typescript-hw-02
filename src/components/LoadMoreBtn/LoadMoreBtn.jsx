@@ -1,7 +1,5 @@
-const LoadMoreBtn = () => {
-  return (
-    <div>LoadMoreBtn</div>
-  )
-}
+const LoadMoreBtn = ({onChangePage}) => {
+  return <button type='submit' onClick={onChangePage}>LoadMoreBtn</button>;
+};
 
-export default LoadMoreBtn
+export default LoadMoreBtn;

@@ -1,8 +1,10 @@
+import css from "./ImageCard.module.css"
+
 const ImageCard = ({ photo }) => {
   return (
-    <li>
+    <li className={css.card}>
       <div>
-        <img src={photo.urls.regular} alt="" />
+        <img src={photo.urls.regular} alt='' />
       </div>
     </li>
   );
