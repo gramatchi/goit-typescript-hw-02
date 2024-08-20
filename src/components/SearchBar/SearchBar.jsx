@@ -1,9 +1,12 @@
 import { useState } from "react";
 import toast, { Toaster } from "react-hot-toast";
+import css from "./SearchBar.module.css";
 
-const notify = (value) => {if(value === "") toast("Fill the field");}
+const notify = (value) => {
+  if (value === "") toast("Fill the field");
+};
 
-const SearchBar = ({handleChangeQuery}) => {
+const SearchBar = ({ handleChangeQuery }) => {
   const [searchValue, setSearchValue] = useState("");
 
   const handleSubmit = (e) => {
@@ -12,9 +15,9 @@ const SearchBar = ({handleChangeQuery}) => {
       notify(searchValue);
       return;
     }
-    handleChangeQuery(searchValue)
+    handleChangeQuery(searchValue);
     setSearchValue("");
-  }
+  };
 
   return (
     <header>
@@ -27,12 +30,10 @@ const SearchBar = ({handleChangeQuery}) => {
           value={searchValue}
           onChange={(e) => setSearchValue(e.target.value)}
         />
-        <button type="submit">
-          Search
-        </button>
+        <button type="submit" className={css.btn}>Search</button>
         <Toaster
           toastOptions={{
-            className: "",
+            className: "toaster-container",
             duration: 2000,
             style: {
               background: "white",

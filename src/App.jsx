@@ -12,17 +12,17 @@ function App() {
   const [photos, setPhotos] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
   const [isError, setIsError] = useState(false);
-  const [page, setPage] = useState(0);
-  const [query, setQuery] = useState(""); // Инициализация как строка
+  const [page, setPage] = useState(1);
+  const [query, setQuery] = useState("");
 
   const handleChangeQuery = (newQuery) => {
     setQuery(newQuery);
-    setPage(1); // Сброс страницы на 1 при новом поисковом запросе
-    setPhotos([]); // Очищаем предыдущие результаты поиска
+    setPage(1);
+    setPhotos([]);
   };
 
   useEffect(() => {
-    if (query === "") return; // Не делаем запрос, если query пустой
+    if (query === "") return;
     const fetchData = async () => {
       try {
         setIsLoading(true);
@@ -37,7 +37,7 @@ function App() {
       }
     };
     fetchData();
-  }, [query, page]); // Добавлено отслеживание query
+  }, [query, page]);
 
   const onChangePage = () => {
     setPage((prev) => prev + 1);
