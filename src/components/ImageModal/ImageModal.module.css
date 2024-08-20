@@ -1,0 +1,17 @@
+.modal_content {
+  position: relative;
+  text-align: center;
+}
+
+.modal_image {
+  max-width: 100%;
+  max-height: 80vh;
+  border-radius: 8px;
+}
+
+.modal_alt {
+  margin-top: 10px;
+  color: #fff;
+  font-size: 16px;
+  line-height: 1.4;
+}

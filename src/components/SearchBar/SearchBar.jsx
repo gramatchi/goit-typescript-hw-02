@@ -30,7 +30,9 @@ const SearchBar = ({ handleChangeQuery }) => {
           value={searchValue}
           onChange={(e) => setSearchValue(e.target.value)}
         />
-        <button type="submit" className={css.btn}>Search</button>
+        <button type="submit" className={css.btn}>
+          Search
+        </button>
         <Toaster
           toastOptions={{
             className: "toaster-container",

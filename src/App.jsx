@@ -14,6 +14,8 @@ function App() {
   const [isError, setIsError] = useState(false);
   const [page, setPage] = useState(1);
   const [query, setQuery] = useState("");
+  const [openModal, setOpenModal] = useState(false);
+  const [modalPhoto, setModalPhoto] = useState({});
 
   const handleChangeQuery = (newQuery) => {
     setQuery(newQuery);
@@ -43,14 +45,31 @@ function App() {
     setPage((prev) => prev + 1);
   };
 
+  const handleOpenModal = (img) => {
+    setOpenModal(true);
+    setModalPhoto(img);
+  };
+
+  const handleCloseModal = () => {
+    setOpenModal(false);
+    setModalPhoto({});
+  };
+
   return (
     <>
       <SearchBar handleChangeQuery={handleChangeQuery} />
       {isLoading && <Loader />}
-      <ImageGallery photos={photos} />
+      <ImageGallery photos={photos} handleOpenModal={handleOpenModal} />
       {isError && <ErrorMessage />}
       <LoadMoreBtn onChangePage={onChangePage} />
-      <ImageModal />
+      {openModal && (
+        <ImageModal
+          modalIsOpen={openModal}
+          closeModal={handleCloseModal}
+          url={modalPhoto.url}
+          alt={modalPhoto.alt}
+        />
+      )}
     </>
   );
 }
