@@ -1,23 +1,28 @@
 import { useEffect, useState } from "react";
 import "./App.css";
-import ErrorMessage from "./components/ErrorMessage/ErrorMessage";
+
 import ImageGallery from "./components/ImageGallery/ImageGallery";
 import ImageModal from "./components/ImageModal/ImageModal";
 import Loader from "./components/Loader/Loader";
 import LoadMoreBtn from "./components/LoadMoreBtn/LoadMoreBtn";
 import SearchBar from "./components/SearchBar/SearchBar";
 import { fetchPhoto } from "./services/api";
+import ErrorMessage from "./components/ErrorMessage/ErrorMessage";
+import { Modal, Photos } from "./AppTypes";
 
 function App() {
-  const [photos, setPhotos] = useState([]);
-  const [isLoading, setIsLoading] = useState(false);
-  const [isError, setIsError] = useState(false);
-  const [page, setPage] = useState(1);
-  const [query, setQuery] = useState("");
-  const [openModal, setOpenModal] = useState(false);
-  const [modalPhoto, setModalPhoto] = useState({});
+  const [photos, setPhotos] = useState<Photos[]>([]);
+  const [isLoading, setIsLoading] = useState<boolean>(false);
+  const [isError, setIsError] = useState<boolean>(false);
+  const [page, setPage] = useState<number>(1);
+  const [query, setQuery] = useState<string>("");
+  const [openModal, setOpenModal] = useState<boolean>(false);
+  const [modalPhoto, setModalPhoto] = useState<Modal>({
+    url: "",
+    alt: "",
+  });
 
-  const handleChangeQuery = (newQuery) => {
+  const handleChangeQuery = (newQuery: string): void => {
     setQuery(newQuery);
     setPage(1);
     setPhotos([]);
@@ -45,14 +50,14 @@ function App() {
     setPage((prev) => prev + 1);
   };
 
-  const handleOpenModal = (img) => {
+  const handleOpenModal = (img: Modal) => {
     setOpenModal(true);
     setModalPhoto(img);
   };
 
   const handleCloseModal = () => {
     setOpenModal(false);
-    setModalPhoto({});
+    setModalPhoto({ url: "", alt: "" });
   };
 
   return (
