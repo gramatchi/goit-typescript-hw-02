@@ -1,3 +1,3 @@
 export interface SearchBarProps {
-    handleChangeQuery: (query: string) => void;
-  }
+  handleChangeQuery: (query: string) => void;
+}

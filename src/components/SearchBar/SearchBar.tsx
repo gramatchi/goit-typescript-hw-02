@@ -1,7 +1,7 @@
 import { useState } from "react";
 import toast, { Toaster } from "react-hot-toast";
 import css from "./SearchBar.module.css";
-import { SearchBarProps} from "./SearchBarTypes";
+import { SearchBarProps } from "./SearchBarTypes";
 
 const notify = (value: string) => {
   if (value === "") toast("Fill the field");

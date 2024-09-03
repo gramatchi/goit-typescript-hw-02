@@ -1,3 +1,3 @@
 export interface LoadMoreBtnProps {
-    onChangePage: () => void;
-  }
+  onChangePage: () => void;
+}
