@@ -1,12 +1,14 @@
 import css from "./ImageCard.module.css";
+import { ImageCardProps } from "./ImageCardProps";
 
-const ImageCard = ({ photo, handleOpenModal }) => {
+
+const ImageCard: React.FC<ImageCardProps> = ({ photo, handleOpenModal }) => {
   return (
     <li className={css.card}>
       <div>
         <img
           src={photo.urls.small}
-          alt=""
+          alt={photo.alt_description || ""}
           onClick={() =>
             handleOpenModal({
               url: photo.urls.regular,

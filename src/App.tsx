@@ -6,10 +6,11 @@ import { fetchPhoto } from "./services/api";
 import { Modal, Photos } from "./AppTypes";
 import SearchBar from "./components/SearchBar/SearchBar";
 import Loader from "./components/Loader/Loader";
+import ImageGallery from "./components/ImageGallery/ImageGallery";
 import ErrorMessage from "./components/ErrorMessage/ErrorMessage";
 import LoadMoreBtn from "./components/LoadMoreBtn/LoadMoreBtn";
 import ImageModal from "./components/ImageModal/ImageModal";
-import ImageGallery from "./components/ImageGallery/ImageGallery";
+
 
 
 function App() {
